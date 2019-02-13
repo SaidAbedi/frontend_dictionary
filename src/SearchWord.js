@@ -13,11 +13,15 @@ class SearchWord extends Component {
     }
     handleSubmit = (e)=>{
         e.preventDefault()
-        this.props.isWordFound(this.state.keyword)
-        this.setState({
-            keyword: " "
-        })
-       console.log(this.state)
+        if(this.state.keyword){
+            this.props.isWordFound(this.state.keyword)
+            this.setState({
+                keyword: " "
+            })
+        }else{
+            alert("You must enter a value")
+        }
+       
     }
 
     render ( ){
@@ -25,7 +29,7 @@ class SearchWord extends Component {
             <form onSubmit={this.handleSubmit} className="input-field container col s6">
                 <label htmlFor="name" ></label>
                 <input placeholder="Search Your KeyWord" type="text" id="keyword" onChange={this.handleChange} value={this.state.keyword}/>
-                <button className="waves-effect waves-light btn">SEARCH</button>
+                <button className="waves-effect waves-light btn-large">SEARCH</button>
             </form>
         )
     }

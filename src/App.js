@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SearchWord from './SearchWord'
 import DefintionCard from './components/DefintionCard'
+import AddNewWord from './components/AddNewWord'
 
 class App extends Component {
   state = {
@@ -9,24 +10,29 @@ class App extends Component {
     frontEndWords: [
       {keyword: "function",
       defintion: "A JavaScript function is a block of code designed to perform a particular task",
-      visibility: false
+      visibility: false,
+      key: 0
     
       },
       {keyword: "render",
       defintion: "The method ReactDom.render() is used to render (display) HTML elements:",
-      visibility: false
+      visibility: false, 
+      key: 1
       }
    ],
    foundWord: null
 }
 
-  addToDictionary = (passedWord )=>{
+  addToDictionary = (passedWord)=>{
     alert(`The word - ${passedWord} - was not found. Would you like to add it to the dictionary?`)
-    console.log("added to dictionary")
+
+    const frontEndWords = [...this.state.frontEndWords, passedWord]
+    this.setState({frontEndWords: frontEndWords})
   }
-  foundWord = (passedWord)=>{
-    console.log("foundWord function fired")
-  }
+
+  // foundWord = (passedWord)=>{
+  //   console.log("foundWord function fired")
+  // }
 
   isWordFound= (passedWord) => {
     
@@ -43,21 +49,22 @@ class App extends Component {
           foundWord: foundWord
         }
       })
-      console.log(this.state)
+      // console.log(this.state.frontEndWords)
      } else {
      
         this.addToDictionary(passedWord)
+        console.log("Nafdafdfaew State" +  this.state.frontEndWords)
     }
  }
 
   render() {
-    console.log(this.state)
     return (
-      <div className="App ">
+      <div className="App container">
         <h1>front end dic·tion·ar·y</h1>
         <h4>Search your keyword</h4>
         <SearchWord isWordFound = {this.isWordFound} allWordsList = {this.state.frontEndWords}/>
         <DefintionCard allWordsList = {this.state.frontEndWords} isWordFound={this.isWordFound}/>
+        <AddNewWord addToDictionary={this.addToDictionary}/>
       </div>
     );
   }
