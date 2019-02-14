@@ -9,16 +9,19 @@ class AddNewWord extends Component {
     }
     handleSubmit = (e)=>{
         e.preventDefault()
+        // To prevent empty entries
         if(this.state.keyword && this.state.defintion){
-            
-            this.props.addToDictionary(this.state)
+        // Check for duplicates
+            this.props.checkForDuplicates(this.state)
+            // this.props.addToDictionary(this.state)
+        //To reset the input values
             this.setState({
-                keyword: "",
-                defintion: ""
+                keyword: " ",
+                defintion: " "
             })
 
         }
-            else{
+            else {
                 alert("You must enter a value")
             }
     }
@@ -38,11 +41,15 @@ class AddNewWord extends Component {
                     <input type="text" placeholder="Enter Your New Word"id="keyword" onChange={this.handleChange} value={this.state.keyword}/>
                     <label for="textarea1"></label>
                     <input type="text" placeholder="Enter Your New Definition"id="defintion" onChange={this.handleChange} value={this.state.defintion}/>
-                    <button class="btn-floating btn-large blue"><i class="material-icons">+</i>Add New</button>
+                    <button class="btn-floating btn-large blue"><i class="material-icons">+</i></button>
                 </div>
              </form>
         )
+        
     }
+}
+AddNewWord.defaultProps = {
+    keyword: "not given"
 }
 
 

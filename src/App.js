@@ -28,12 +28,10 @@ class App extends Component {
 
     const frontEndWords = [...this.state.frontEndWords, passedWord]
     this.setState({frontEndWords: frontEndWords})
+    alert(`You added ${passedWord} in the dictionary`)
   }
-
-  // foundWord = (passedWord)=>{
-  //   console.log("foundWord function fired")
-  // }
-
+  
+  // Argument from the SearchWord Component
   isWordFound= (passedWord) => {
     
     let filteredIndex = this.state.frontEndWords.findIndex(item => 
@@ -53,9 +51,20 @@ class App extends Component {
      } else {
      
         this.addToDictionary(passedWord)
-        console.log("Nafdafdfaew State" +  this.state.frontEndWords)
+        console.log(`You added ${passedWord} in the dictionary`)
     }
  }
+  checkForDuplicates = (passedWord) =>{
+    let filteredIndex = this.state.frontEndWords.findIndex(item => 
+      item.keyword === passedWord.keyword
+      
+    )  
+    if(filteredIndex > -1){
+      alert("This word already exists")
+  } else{
+    this.addToDictionary(passedWord)
+  }
+}
 
   render() {
     return (
@@ -64,9 +73,12 @@ class App extends Component {
         <h4>Search your keyword</h4>
         <SearchWord isWordFound = {this.isWordFound} allWordsList = {this.state.frontEndWords}/>
         <DefintionCard allWordsList = {this.state.frontEndWords} isWordFound={this.isWordFound}/>
-        <AddNewWord addToDictionary={this.addToDictionary}/>
+        <AddNewWord 
+        addToDictionary={this.addToDictionary}
+        checkForDuplicates = {this.checkForDuplicates}
+        />
       </div>
-    );
+    )
   }
 }
 

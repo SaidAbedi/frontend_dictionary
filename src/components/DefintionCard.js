@@ -8,7 +8,7 @@ const DefintionCard = ({allWordsList})=> {
                     <div className="card-content white-text s12" key={item.id}>
                         <h3>Word: {item.keyword}</h3>
                         <p><strong>Defintion: {item.defintion}</strong></p>
-                    </div>
+                    </div> 
                 </div>
                 )
         }
@@ -19,5 +19,6 @@ const DefintionCard = ({allWordsList})=> {
         </div>
     )
 }
+
 
 export default DefintionCard
